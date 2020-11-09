@@ -13,7 +13,7 @@ import java.io.Serializable;
 public class Employe implements Serializable, Comparable<Employe>
 {
 	private static final long serialVersionUID = 4795721718037994734L;
-	private String nom, prenom, password, mail;
+	private String nom, prenom, password, mail, dateArrivée, dateDépart;
 	private Ligue ligue;
 	private GestionPersonnel gestionPersonnel;
 	
@@ -180,5 +180,21 @@ public class Employe implements Serializable, Comparable<Employe>
 		else
 			res += ligue.toString();
 		return res + ")";
+	}
+
+	public String getDateDépart() {
+		return dateDépart;
+	}
+
+	public void setDateDépart(String dateDépart) {
+		this.dateDépart = dateDépart;
+	}
+
+	public String getDateArrivée() {
+		return dateArrivée;
+	}
+
+	public void setDateArrivée(String dateArrivée) {
+		this.dateArrivée = dateArrivée;
 	}
 }
