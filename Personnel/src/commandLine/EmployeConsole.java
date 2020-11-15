@@ -11,7 +11,7 @@ public class EmployeConsole
 {
 	private Option afficher(final Employe employe)
 	{
-		return new Option("Afficher l'employ√©", "l", () -> {System.out.println(employe);});
+		return new Option("Afficher l'employÈ", "l", () -> {System.out.println(employe);});
 	}
 
 	ListOption<Employe> editerEmploye()
@@ -21,14 +21,14 @@ public class EmployeConsole
 
 	Option editerEmploye(Employe employe)
 	{
-			Menu menu = new Menu("G√©rer le compte " + employe.getNom(), "c");
+			Menu menu = new Menu("GÈrer le compte " + employe.getNom(), "c");
 			menu.add(afficher(employe));
 			menu.add(changerNom(employe));
 			menu.add(changerPrenom(employe));
 			menu.add(changerMail(employe));
 			menu.add(changerPassword(employe));
-			menu.add(changerDateDÈpart(employe));
 			menu.add(changerDateArrivÈe(employe));
+			menu.add(changerDateDÈpart(employe));
 			menu.addBack("q");
 			return menu;
 	}
@@ -50,7 +50,7 @@ public class EmployeConsole
 	
 	private Option changerPrenom(final Employe employe)
 	{
-		return new Option("Changer le pr√©nom", "p", () -> {employe.setPrenom(getString("Nouveau pr√©nom : "));});
+		return new Option("Changer le prÈnom", "p", () -> {employe.setPrenom(getString("Nouveau pr√©nom : "));});
 	}
 	
 	private Option changerMail(final Employe employe)
