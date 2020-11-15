@@ -86,7 +86,7 @@ public class LigueConsole
 
 	private List<Ligue> selectionnerLigue()
 	{
-		return new List<Ligue>("SÃ©lectionner une ligue", "e", 
+		return new List<Ligue>("Sélectionner une ligue", "e", 
 				() -> new ArrayList<>(gestionPersonnel.getLigues()),
 				(element) -> editerLigue(element)
 				);
@@ -94,7 +94,7 @@ public class LigueConsole
 	
 	private Option ajouterEmploye(final Ligue ligue)
 	{
-		return new Option("ajouter un employÃ©", "a",
+		return new Option("ajouter un employé", "a",
 				() -> 
 				{
 					ligue.addEmploye(getString("nom : "), 
