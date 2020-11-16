@@ -18,7 +18,7 @@ class testLigue
 	void testCreateLigue() throws SauvegardeImpossible
 	{
 		Ligue ligue = gestionPersonnel.addLigue("Flechete");
-		assertEquals("Fléchettes", ligue.getNom());
+		assertEquals("Flechete", ligue.getNom());
 	}
 
 	@Test
