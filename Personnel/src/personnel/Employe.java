@@ -192,9 +192,9 @@ public class Employe implements Serializable, Comparable<Employe>
 	@Override
 	public String toString()
 	{
-		String res = nom +" " +prenom + " "+ mail+" " + dateArrivée+ " "+ dateDépart;
+		String res = nom +" " +prenom + " "+ mail+" " + dateArrivée+ " "+ dateDépart + ": ";
 		if (estRoot())
-			res += " (super-utilisateur)";
+			res += " super-utilisateur";
 		else
 			res += ligue.toString();
 		return res ;
