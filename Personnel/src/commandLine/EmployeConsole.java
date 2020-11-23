@@ -6,6 +6,7 @@ import commandLineMenus.ListOption;
 import commandLineMenus.Menu;
 import commandLineMenus.Option;
 import personnel.Employe;
+import personnel.Ligue;
 
 public class EmployeConsole 
 {
@@ -29,10 +30,19 @@ public class EmployeConsole
 			menu.add(changerPassword(employe));
 			menu.add(changerDateArrivée(employe));
 			menu.add(changerDateDépart(employe));
+			menu.add(supprimerEmploye(employe));
 			menu.addBack("q");
 			return menu;
 	}
 
+	private Option supprimerEmploye(final Employe employe)
+	{
+		return new Option("Supprimer un employé", "z", ()->{
+			employe.remove();
+		}
+	);
+	}
+	
 	private Option changerDateArrivée(final Employe employe) 
 	{
 		return new Option("Changer la date d'arrivée", "a", () -> {employe.setDateArrivée(getString("Nouvelle date d'arrivée : "));});
