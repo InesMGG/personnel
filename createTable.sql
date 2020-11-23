@@ -25,7 +25,7 @@ CREATE TABLE Employe
 	DateDE date,
 	EstRoot boolean,
 	EstAdmin boolean,
-	NumL int not null references Ligue(NumL),
+	NumL int null references Ligue(NumL),
 	constraint pk_Employe primary key (idEmploye)
 )ENGINE = INNODB;
 
