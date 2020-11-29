@@ -1,6 +1,7 @@
 package personnel;
 
 import java.io.Serializable;
+import java.sql.Date;
 
 /**
  * EmployÃ© d'une ligue hÃ©bergÃ©e par la M2L. Certains peuvent 
@@ -13,11 +14,12 @@ import java.io.Serializable;
 public class Employe implements Serializable, Comparable<Employe>
 {
 	private static final long serialVersionUID = 4795721718037994734L;
-	private String nom, prenom, password, mail, dateArrivée, dateDépart;
+	private String nom, prenom, password, mail;
+	private Date dateArrivée, dateDépart;
 	private Ligue ligue;
 	private GestionPersonnel gestionPersonnel;
 	
-	Employe(GestionPersonnel gestionPersonnel, Ligue ligue, String nom, String prenom, String mail, String password, String dateArrivée, String dateDépart)
+	Employe(GestionPersonnel gestionPersonnel, Ligue ligue, String nom, String prenom, String mail, String password, Date dateArrivée, Date dateDépart)
 	{
 		this.gestionPersonnel = gestionPersonnel;
 		this.nom = nom;
@@ -141,19 +143,19 @@ public class Employe implements Serializable, Comparable<Employe>
 	 * @return la ligue Ã  laquelle l'employÃ© est affectÃ©.
 	 */
 	
-	public String getDateDépart() {
+	public Date getDateDépart() {
 		return dateDépart;
 	}
 
-	public void setDateDépart(String dateDépart) {
+	public void setDateDépart(Date dateDépart) {
 		this.dateDépart = dateDépart;
 	}
 
-	public String getDateArrivée() {
+	public Date getDateArrivée() {
 		return dateArrivée;
 	}
 
-	public void setDateArrivée(String dateArrivée) {
+	public void setDateArrivée(Date dateArrivée) {
 		this.dateArrivée = dateArrivée;
 	}
 	
