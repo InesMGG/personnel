@@ -25,7 +25,7 @@ class testLigue
 	void testAddEmploye() throws SauvegardeImpossible
 	{
 		Ligue ligue = gestionPersonnel.addLigue("Flechete");
-		Employe employe = ligue.addEmploye("Bouchard", "Gérard", "g.bouchard@gmail.com", "azerty", "10/10/2001", "11/04/2005"); 
+		Employe employe = ligue.addEmploye("Bouchard", "Gérard", "g.bouchard@gmail.com", "azerty", "11/04/2001", "10/10/2020"); 
 		assertEquals(employe, ligue.getEmployes().first());
 	}
 	
@@ -59,7 +59,7 @@ class testLigue
 	void addEmploye() throws SauvegardeImpossible
 	{
 		Ligue ligue = gestionPersonnel.addLigue("Flechete");
-		Employe employe = ligue.addEmploye("Neymar", "Jean", "adresse@mail.fr", PASSWORD, "11/04/2001", "16/11/2020");
+		Employe employe = ligue.addEmploye("Neymar", "Jean", "adresse@mail.fr", PASSWORD, null, null);
 		assertEquals(employe, ligue.getEmployes().first());
 	}
 	
@@ -90,7 +90,7 @@ class testLigue
 	{
 		Ligue ligue = gestionPersonnel.addLigue("Flechete");
 		assertEquals("Flechete", ligue.getNom());
-		ligue.remove();
+		ligue.remove();;
 		assertTrue(gestionPersonnel.getLigues().isEmpty());
 	}
 	

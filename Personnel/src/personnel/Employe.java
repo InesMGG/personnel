@@ -1,6 +1,7 @@
 package personnel;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 
 /**
  * EmployÃ© d'une ligue hÃ©bergÃ©e par la M2L. Certains peuvent 
@@ -13,18 +14,19 @@ import java.io.Serializable;
 public class Employe implements Serializable, Comparable<Employe>
 {
 	private static final long serialVersionUID = 4795721718037994734L;
-	private String nom, prenom, password, mail, dateArrivée, dateDépart;
+	private String nom, prenom, password, mail;
+	private LocalDate dateArrivée, dateDépart;
 	private Ligue ligue;
 	private GestionPersonnel gestionPersonnel;
 	
-	Employe(GestionPersonnel gestionPersonnel, Ligue ligue, String nom, String prenom, String mail, String password, String dateArrivée, String dateDépart)
+	Employe(GestionPersonnel gestionPersonnel, Ligue ligue, String nom, String prenom, String mail, String password, LocalDate dateArrivée, LocalDate dateDépart)
 	{
 		this.gestionPersonnel = gestionPersonnel;
 		this.nom = nom;
 		this.prenom = prenom;
 		this.password = password;
 		this.mail = mail;
-		this.dateArrivée = dateArrivée;
+		this.dateArrivée = LocalDate.now();
 		this.dateDépart = dateDépart;
 		this.ligue = ligue;
 	}
@@ -141,20 +143,30 @@ public class Employe implements Serializable, Comparable<Employe>
 	 * @return la ligue Ã  laquelle l'employÃ© est affectÃ©.
 	 */
 	
-	public String getDateDépart() {
+	public LocalDate getDateDépart() {
 		return dateDépart;
 	}
 
-	public void setDateDépart(String dateDépart) {
-		this.dateDépart = dateDépart;
+	public void setDateDépart(String dateDépart) throws ImpossibleChangerDate {
+		LocalDate temp = LocalDate.parse(dateDépart);
+		boolean isAfter = temp.isBefore(dateArrivée);
+		if (isAfter)
+			throw new ImpossibleChangerDate();
+		else 
+			this.dateDépart = temp;
 	}
 
-	public String getDateArrivée() {
+	public LocalDate getDateArrivée() {
 		return dateArrivée;
 	}
 
-	public void setDateArrivée(String dateArrivée) {
-		this.dateArrivée = dateArrivée;
+	public void setDateArrivée(String dateArrivée) throws ImpossibleChangerDate {
+		LocalDate temp = LocalDate.parse(dateArrivée);
+		boolean isAfter = temp.isAfter(dateDépart);
+		if (isAfter)
+			throw new ImpossibleChangerDate();
+		else 
+			this.dateArrivée = temp;
 	}
 	
 	public Ligue getLigue()
