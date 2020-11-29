@@ -7,7 +7,6 @@ import commandLineMenus.Menu;
 import commandLineMenus.Option;
 import personnel.Employe;
 import personnel.ImpossibleChangerDate;
-import personnel.Ligue;
 
 public class EmployeConsole 
 {
