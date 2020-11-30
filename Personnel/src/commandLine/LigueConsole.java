@@ -138,8 +138,7 @@ public class LigueConsole
 	{
 		return new List<Employe>("Sélectionner un nouvel administrateur", "w",
 				()-> new ArrayList<>(ligue.getEmployes()),
-				employeConsole.editerEmploye()
-				//ligue.setAdministrateur()
+				()-> ligue.setAdministrateur()
 				);
 	}
 	
