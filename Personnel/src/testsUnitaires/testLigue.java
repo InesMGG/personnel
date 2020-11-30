@@ -3,6 +3,7 @@ package testsUnitaires;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 
 import org.junit.jupiter.api.Test;
 
@@ -25,7 +26,7 @@ class testLigue
 	void testAddEmploye() throws SauvegardeImpossible
 	{
 		Ligue ligue = gestionPersonnel.addLigue("Flechete");
-		Employe employe = ligue.addEmploye("Bouchard", "Gérard", "g.bouchard@gmail.com", "azerty", "11/04/2001", "10/10/2020"); 
+		Employe employe = ligue.addEmploye("Bouchard", "Gérard", "g.bouchard@gmail.com", "azerty", LocalDate.parse("2001-04-11"), LocalDate.parse("2020-10-10")); 
 		assertEquals(employe, ligue.getEmployes().first());
 	}
 	

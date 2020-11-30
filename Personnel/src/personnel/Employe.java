@@ -29,7 +29,7 @@ public class Employe implements Serializable, Comparable<Employe>
 		this.prenom = prenom;
 		this.password = password;
 		this.mail = mail;
-		this.dateArrivée = LocalDate.now();
+		this.dateArrivée = dateArrivée;
 		this.dateDépart = dateDépart;
 		this.ligue = ligue;
 	}
@@ -150,26 +150,51 @@ public class Employe implements Serializable, Comparable<Employe>
 		return dateDépart;
 	}
 
-	public void setDateDépart(String dateDépart) throws ImpossibleChangerDate {
-		LocalDate temp = LocalDate.parse(dateDépart);
-		boolean isAfter = temp.isBefore(dateArrivée);
-		if (isAfter)
-			throw new ImpossibleChangerDate();
-		else 
-			this.dateDépart = temp;
+	public void setDateDépart(String dateDépart) throws ImpossibleDeChangerDate 
+	{
+		LocalDate dateDepart = LocalDate.parse(dateDépart);
+		if (dateArrivée == null)
+		{
+			this.dateDépart = dateDepart;
+		}
+		else
+		{
+			boolean isBefore = dateDepart.isBefore(dateArrivée);
+			if (isBefore)
+			{
+				throw new ImpossibleDeChangerDate();
+			}
+			else
+			{
+				this.dateDépart = dateDepart;
+			}
+		}
 	}
 
 	public LocalDate getDateArrivée() {
 		return dateArrivée;
 	}
 
-	public void setDateArrivée(String dateArrivée) throws ImpossibleChangerDate {
-		LocalDate temp = LocalDate.parse(dateArrivée);
-		boolean isAfter = temp.isAfter(dateDépart);
-		if (isAfter)
-			throw new ImpossibleChangerDate();
-		else 
-			this.dateArrivée = temp;
+	public void setDateArrivée(String dateArrivée) throws ImpossibleDeChangerDate {
+		LocalDate dateArrivee = LocalDate.parse(dateArrivée);
+		if(dateDépart == null)
+		{
+			this.dateArrivée = dateArrivee;
+		}
+		else
+		{
+			boolean isBefore = dateArrivee.isBefore(dateDépart);
+			if (isBefore)
+			{
+				this.dateArrivée = dateArrivee;
+			}
+			else
+				
+			{
+				throw new ImpossibleDeChangerDate();
+			}
+		}
+		
 	}
 	
 	public Ligue getLigue()
@@ -207,7 +232,7 @@ public class Employe implements Serializable, Comparable<Employe>
 	@Override
 	public String toString()
 	{
-		String res = nom +" " +prenom + " "+ mail+" " + dateArrivée+ " "+ dateDépart;
+		String res = nom +" " +prenom + " "+ mail+" " + dateArrivée+ " "+ dateDépart + " ";
 		if (estRoot())
 			res += " (super-utilisateur)";
 		else
