@@ -1,31 +1,29 @@
 DROP DATABASE IF EXISTS MaisonDL;
-DROP TABLE IF EXISTS Ligue;
-DROP TABLE IF EXISTS Employe;
-
 CREATE DATABASE MaisonDL;
 USE MaisonDL;
 
 CREATE TABLE Ligue
 (
-	NumL int not null,
-	NomL varchar(25),
-	constraint pk_Ligue primary key (idLigue)
+	NumL int(4) NOT NULL,
+	NomL varchar(50),
+	primary key (NumL)
 )ENGINE = INNODB;
 
 CREATE TABLE Employe 
 (
-	NumE int not null,
-	NomE varchar(25),
-	PrenomE varchar(25),
-	CourrielE varchar(25),
-	AdrueE varchar(25),
-	CPE int,
-	VilleE varchar(25),
-	DateAE date,
-	DateDE date,
-	EstRoot boolean,
-	EstAdmin boolean,
-	NumL int null references Ligue(NumL),
-	constraint pk_Employe primary key (idEmploye)
+	NumE int(4) not null,
+	NomE varchar(50) null,
+	PrenomE varchar(50) null,
+	CourrielE varchar(50) null,
+	AdrueE varchar(50) null,
+	CPE int(5) null,
+	VilleE varchar(50) null,
+	DAE date null,
+	DDE date null,
+	EstRoot varchar(3),
+	EstAdmin varchar(3),
+	NumLigue int(4) null,
+	primary key (NumE),
+	foreign key (NumLigue) references Ligue(NumL)
 )ENGINE = INNODB;
 
