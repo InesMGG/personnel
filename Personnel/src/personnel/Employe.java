@@ -150,7 +150,7 @@ public class Employe implements Serializable, Comparable<Employe>
 		return dateDépart;
 	}
 
-	public void setDateDépart(String dateDépart) throws ImpossibleDeChangerDate 
+	public void setDateDépart(String dateDépart) throws ImpossibleChangerDate 
 	{
 		LocalDate dateDepart = LocalDate.parse(dateDépart);
 		if (dateArrivée == null)
@@ -162,7 +162,7 @@ public class Employe implements Serializable, Comparable<Employe>
 			boolean isBefore = dateDepart.isBefore(dateArrivée);
 			if (isBefore)
 			{
-				throw new ImpossibleDeChangerDate();
+				throw new ImpossibleChangerDate();
 			}
 			else
 			{
@@ -175,7 +175,7 @@ public class Employe implements Serializable, Comparable<Employe>
 		return dateArrivée;
 	}
 
-	public void setDateArrivée(String dateArrivée) throws ImpossibleDeChangerDate {
+	public void setDateArrivée(String dateArrivée) throws ImpossibleChangerDate {
 		LocalDate dateArrivee = LocalDate.parse(dateArrivée);
 		if(dateDépart == null)
 		{
@@ -191,7 +191,7 @@ public class Employe implements Serializable, Comparable<Employe>
 			else
 				
 			{
-				throw new ImpossibleDeChangerDate();
+				throw new ImpossibleChangerDate();
 			}
 		}
 		

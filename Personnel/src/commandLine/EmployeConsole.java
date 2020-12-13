@@ -6,7 +6,7 @@ import commandLineMenus.ListOption;
 import commandLineMenus.Menu;
 import commandLineMenus.Option;
 import personnel.Employe;
-import personnel.ImpossibleDeChangerDate;
+import personnel.ImpossibleChangerDate;
 
 public class EmployeConsole 
 {
@@ -48,7 +48,7 @@ public class EmployeConsole
 	{
 		return new Option("Changer la date d'arrivée", "a", () -> {try {
 			employe.setDateArrivée(getString("Nouvelle date d'arrivée : "));
-		} catch (ImpossibleDeChangerDate e) {
+		} catch (ImpossibleChangerDate e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}});
@@ -58,7 +58,7 @@ public class EmployeConsole
 	{
 		return new Option("Changer la date de départ", "d", () -> {try {
 			employe.setDateDépart(getString("Nouvelle date de départ : "));
-		} catch (ImpossibleDeChangerDate e) {
+		} catch (ImpossibleChangerDate e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}});
