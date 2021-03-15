@@ -4,7 +4,7 @@ USE MaisonDL;
 
 CREATE TABLE Ligue
 (
-	NumL int(4) NOT NULL,
+	NumL int(4) NOT NULL AUTO_INCREMENT,
 	NomL varchar(50),
 	primary key (NumL)
 )ENGINE = INNODB;

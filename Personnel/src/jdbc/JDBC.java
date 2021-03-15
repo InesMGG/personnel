@@ -17,8 +17,8 @@ public class JDBC implements Passerelle
 	{
 		try
 		{
-			Class.forName(CredentialsExample.getDriverClassName());
-			connection = DriverManager.getConnection(CredentialsExample.getUrl(), CredentialsExample.getUser(), CredentialsExample.getPassword());
+			Class.forName(Credentials.getDriverClassName());
+			connection = DriverManager.getConnection(Credentials.getUrl(), Credentials.getUser(), Credentials.getPassword());
 		}
 		catch (ClassNotFoundException e)
 		{
@@ -48,6 +48,7 @@ public class JDBC implements Passerelle
 		}
 		return gestionPersonnel;
 	}
+	
 
 	@Override
 	public void sauvegarderGestionPersonnel(GestionPersonnel gestionPersonnel) throws SauvegardeImpossible 
@@ -74,7 +75,7 @@ public class JDBC implements Passerelle
 		try 
 		{
 			PreparedStatement instruction;
-			instruction = connection.prepareStatement("insert into ligue (nom) values(?)", Statement.RETURN_GENERATED_KEYS);
+			instruction = connection.prepareStatement("insert into ligue (NomL) values(?)", Statement.RETURN_GENERATED_KEYS);
 			instruction.setString(1, ligue.getNom());		
 			instruction.executeUpdate();
 			ResultSet id = instruction.getGeneratedKeys();

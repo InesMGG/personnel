@@ -15,6 +15,7 @@ public class PersonnelConsole
 		this.gestionPersonnel = gestionPersonnel;
 		this.employeConsole = new EmployeConsole();
 		this.ligueConsole = new LigueConsole(gestionPersonnel, employeConsole);
+		
 	}
 	
 	public void start()
