@@ -17,13 +17,11 @@ INSERT INTO Ligue VALUES (4, 'Ligue de natation');
 
 CREATE TABLE Employe 
 (
-	NumE int(4) not null,
+	NumE int(4) not null AUTO_INCREMENT,
 	NomE varchar(50) null,
 	PrenomE varchar(50) null,
 	CourrielE varchar(50) null,
-	AdrueE varchar(50) null,
-	CPE int(5) null,
-	VilleE varchar(50) null,
+	PasswordE varchar(50) null,
 	DAE date null,
 	DDE date null,
 	EstRoot boolean default 0,
@@ -34,13 +32,12 @@ CREATE TABLE Employe
 )ENGINE = INNODB;
 
 
-INSERT INTO Employe VALUES (0,'root',NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,0, NULL);
-INSERT INTO Employe VALUES (1,'DOLI','Prane','doli.prane@yahoo.fr','23 Rue Auguste Perret',75013,'Paris',NULL,NULL,0,1,1);
-INSERT INTO Employe VALUES (2,'MONO','Poly','m.poly@gmail.com','75 Rue Pierre Demours',75017,'Paris',NULL,NULL,0,1,2);
-INSERT INTO Employe VALUES (3,'FLEUR','Rose','fleur.rose@yahoo.com','22 Rue des Plantes',75012,'Paris',NULL,NULL,0,1,3);
-INSERT INTO Employe VALUES (4,'STAN','Evelynn','evelynn.isthatbitch@gmail.com','179 Avenue Daumesnil',75012,'Paris',NULL,NULL,0,1,4);
-INSERT INTO Employe VALUES (5,'ROBSON','Aleksander','robson.aleksander@hotmail.com','70 Rue Stephenson',75018,'Paris',NULL,NULL,0,0,1);
-INSERT INTO Employe VALUES (6,'FREEMAN','Kiya','k.freeman@gmail.com','244 Rue Championnet',75018,'Paris',NULL,NULL,0,0,1);
-INSERT INTO Employe VALUES (7,'FAULKNER','Luca','luca.faulkner@yahoo.fr','37 Rue du Louvre',75002,'Paris',NULL,NULL,0,0,1);
-INSERT INTO Employe VALUES (8,'FERGUSON','Nafeesa','ferguson.nafeesa@gmail.com','19 Rue de la Monnaie',75001,'Paris',NULL,NULL,0,0,2);
-INSERT INTO Employe VALUES (9,'HARPER','Lennon','lennonharper@gmail.com','10 Rue Tronchet',75008,'Paris',NULL,NULL,0,0,2);
+INSERT INTO Employe VALUES (1,'root',NULL,NULL,NULL,NULL,NULL,1,0, NULL);
+INSERT INTO Employe VALUES (2,'DOLI','Prane','doli.prane@yahoo.fr',NULL,NULL,NULL,0,1,1);
+INSERT INTO Employe VALUES (3,'MONO','Poly','m.poly@gmail.com',NULL,NULL,NULL,0,1,2);
+INSERT INTO Employe VALUES (4,'FLEUR','Rose','fleur.rose@yahoo.com',NULL,NULL,NULL,0,1,3);
+INSERT INTO Employe VALUES (5,'STAN','Evelynn','evelynn.isthatbitch@gmail.com',NULL,NULL,NULL,0,1,4);
+INSERT INTO Employe VALUES (6,'ROBSON','Aleksander','robson.aleksander@hotmail.com',NULL,NULL,NULL,0,0,1);
+INSERT INTO Employe VALUES (7,'FREEMAN','Kiya','k.freeman@gmail.com',NULL,NULL,NULL,0,0,2);
+INSERT INTO Employe VALUES (8,'FAULKNER','Luca','luca.faulkner@yahoo.fr',NULL,NULL,NULL,0,0,3);
+INSERT INTO Employe VALUES (9,'FERGUSON','Nafeesa','ferguson.nafeesa@gmail.com',NULL,NULL,NULL,0,0,4);
