@@ -1,7 +1,37 @@
+DROP DATABASE IF EXISTS MaisonDL;
+CREATE DATABASE MaisonDL;
+USE MaisonDL;
+
+CREATE TABLE Ligue
+(
+	NumL int(4) NOT NULL AUTO_INCREMENT,
+	NomL varchar(50),
+	primary key (NumL)
+)ENGINE = INNODB;
+
+
 INSERT INTO Ligue VALUES (1, 'Ligue de basket');
 INSERT INTO Ligue VALUES (2, 'Ligue de volley-ball');
 INSERT INTO Ligue VALUES (3, 'Ligue de tennis');
 INSERT INTO Ligue VALUES (4, 'Ligue de natation');
+
+CREATE TABLE Employe 
+(
+	NumE int(4) not null,
+	NomE varchar(50) null,
+	PrenomE varchar(50) null,
+	CourrielE varchar(50) null,
+	AdrueE varchar(50) null,
+	CPE int(5) null,
+	VilleE varchar(50) null,
+	DAE date null,
+	DDE date null,
+	EstRoot varchar(3),
+	EstAdmin varchar(3),
+	NumLigue int(4) null,
+	primary key (NumE),
+	foreign key (NumLigue) references Ligue(NumL)
+)ENGINE = INNODB;
 
 
 INSERT INTO Employe VALUES (0,'root',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'oui','non', NULL);
