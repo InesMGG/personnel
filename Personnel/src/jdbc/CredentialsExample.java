@@ -12,7 +12,7 @@ public class CredentialsExample
 	
 	static String getUrl() 
 	{
-		return "jdbc:" + driver + "://" + host + "/" + database ;
+		return "jdbc:" + driver + "://" + host + "/" + database +"?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC" ;
 	}
 	
 	static String getDriverClassName()
