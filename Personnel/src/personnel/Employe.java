@@ -21,6 +21,20 @@ public class Employe implements Serializable, Comparable<Employe>
 	private LocalDate dateArrivée, dateDépart;
 	private Ligue ligue;
 	private GestionPersonnel gestionPersonnel;
+	private int id;
+	
+	Employe(GestionPersonnel gestionPersonnel, Ligue ligue, String nom, String prenom, String mail, String password, LocalDate dateArrivée, LocalDate dateDépart, int id)
+	{
+		this.gestionPersonnel = gestionPersonnel;
+		this.nom = nom;
+		this.prenom = prenom;
+		this.password = password;
+		this.mail = mail;
+		this.dateArrivée = dateArrivée;
+		this.dateDépart = dateDépart;
+		this.ligue = ligue;
+		this.id = id;
+	}
 	
 	Employe(GestionPersonnel gestionPersonnel, Ligue ligue, String nom, String prenom, String mail, String password, LocalDate dateArrivée, LocalDate dateDépart)
 	{

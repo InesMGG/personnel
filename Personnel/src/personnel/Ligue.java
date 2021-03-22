@@ -43,6 +43,11 @@ public class Ligue implements Serializable, Comparable<Ligue>
 		this.id = id;
 	}
 
+	public int getId()
+	{
+		return id;
+	}
+	
 	/**
 	 * Retourne le nom de la ligue.
 	 * @return le nom de la ligue.
@@ -114,6 +119,13 @@ public class Ligue implements Serializable, Comparable<Ligue>
 	public Employe addEmploye(String nom, String prenom, String mail, String password, LocalDate dateArrivée, LocalDate dateDépart)
 	{
 		Employe employe = new Employe(this.gestionPersonnel, this, nom, prenom, mail, password, dateArrivée, dateDépart);
+		employes.add(employe);
+		return employe;
+	}
+	
+	public Employe addEmploye(int id, String nom, String prenom, String mail, String password, LocalDate dateArrivée, LocalDate dateDépart)
+	{
+		Employe employe = new Employe(this.gestionPersonnel, this, nom, prenom, mail, password, dateArrivée, dateDépart, id);
 		employes.add(employe);
 		return employe;
 	}
