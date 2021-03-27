@@ -45,9 +45,9 @@ public class JDBC implements Passerelle
 				Ligue ligue = gestionPersonnel.addLigue(ligues.getInt(1), ligues.getString(2));
 				String requete2 = "select * from employe where Numligue=" + ligue.getId();
 				Statement instruction2 = connection.createStatement();
-				ResultSet employes = instruction.executeQuery(requete);
+				ResultSet employes = instruction2.executeQuery(requete2);
 				while (employes.next())
-					ligue.addEmploye(employes.getInt(1), employes.getString(2), employes.getString(3), employes.getString(4), employes.getString(5), LocalDate.parse(employes.getString(6)), LocalDate.parse(employes.getString(7)));
+					ligue.addEmploye(employes.getInt(1), employes.getString(2), employes.getString(3), employes.getString(4), employes.getString(5), LocalDate.parse(employes.getDate(6).toString()), LocalDate.parse(employes.getDate(7).toString()));
 			}
 		}
 		catch (SQLException e)
@@ -56,6 +56,7 @@ public class JDBC implements Passerelle
 		}
 		return gestionPersonnel;
 	}
+	
 	
 
 	@Override
@@ -78,7 +79,7 @@ public class JDBC implements Passerelle
 	}
 	
 	@Override
-	public int insert(Ligue ligue) throws SauvegardeImpossible 
+	public int insertLigue(Ligue ligue) throws SauvegardeImpossible 
 	{
 		try 
 		{
@@ -97,26 +98,67 @@ public class JDBC implements Passerelle
 		}		
 	}
 	
+	@Override
+	public int updateLigue(Ligue ligue) throws SauvegardeImpossible 
+	{
+		try 
+		{
+			PreparedStatement instruction;
+			instruction = connection.prepareStatement("update into ligue (NomL) values(?)", Statement.RETURN_GENERATED_KEYS);
+			instruction.setString(1, ligue.getNom());		
+			instruction.executeUpdate();
+			return 0;
+		} 
+		catch (SQLException exception) 
+		{
+			exception.printStackTrace();
+			throw new SauvegardeImpossible(exception);
+		}		
+	}
+	
+	
+	@Override
+	public int insertEmploye(Employe employe) throws SauvegardeImpossible 
+	{
+		try 
+		{
+			PreparedStatement instruction;
+			instruction = connection.prepareStatement("insert into employe (NomE, PrenomE,CourrielE,PasswordE,DAE,DDE,NumLigue ) values(?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
+			instruction.setString(1, employe.getNom());
+			instruction.setString(2, employe.getPrenom());
+			instruction.setString(3, employe.getMail());
+			instruction.setString(4, null);
+			instruction.setString(5, employe.getDateArrivée().toString());
+			instruction.setString(6, employe.getDateDépart().toString());
+			instruction.setInt(7, employe.getLigue().getId());		
+			instruction.executeUpdate();
+			ResultSet id = instruction.getGeneratedKeys();
+			id.next();
+			return id.getInt(1);
+		} 
+		catch (SQLException exception) 
+		{
+			exception.printStackTrace();
+			throw new SauvegardeImpossible(exception);
+		}		
+	}
+	
 //	@Override
-//	public int insert(Employe employe) throws SauvegardeImpossible 
+//	public int updateEmploye(Employe employe) throws SauvegardeImpossible 
 //	{
 //		try 
 //		{
 //			PreparedStatement instruction;
-//			instruction = connection.prepareStatement("insert into employe (NomE, PrenomE, ) values(?)", Statement.RETURN_GENERATED_KEYS);
+//			instruction = connection.prepareStatement("insert into employe (NomE, PrenomE,CourrielE,PasswordE,DAE,DDE,NumLigue ) values(?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
 //			instruction.setString(1, employe.getNom());
 //			instruction.setString(2, employe.getPrenom());
 //			instruction.setString(3, employe.getMail());
 //			instruction.setString(4, null);
-//			instruction.setString(5, employe.getDateArrivée());
-//			instruction.setString(6, employe.getDateDépart());
-//			instruction.setString(7, 0); 
-//			instruction.setString(8, 0);
-//			instruction.setString(9, employe.getLigue());		
+//			instruction.setString(5, employe.getDateArrivée().toString());
+//			instruction.setString(6, employe.getDateDépart().toString());
+//			instruction.setInt(7, employe.getLigue().getId());		
 //			instruction.executeUpdate();
-//			ResultSet id = instruction.getGeneratedKeys();
-//			id.next();
-//			return id.getInt(1);
+//			return 0;
 //		} 
 //		catch (SQLException exception) 
 //		{
@@ -125,5 +167,4 @@ public class JDBC implements Passerelle
 //		}		
 //	}
 	
-
 }
