@@ -186,4 +186,25 @@ public class JDBC implements Passerelle
 		}
 	}
 	
+	@Override
+	public int newAdmin(Employe employe) throws SauvegardeImpossible, SQLException
+	{
+		String requete = "select NumE from employe where EstAdmin = 1 and NumLigue = " + employe.getLigue().getId();
+		Statement instruction = connection.createStatement();
+		ResultSet admin = instruction.executeQuery(requete);
+		if(admin.next())
+		{
+			PreparedStatement statement;
+			statement = connection.prepareStatement("update employe set EstAdmin = 0 where NumE = ? ", Statement.RETURN_GENERATED_KEYS);
+			statement.setInt(1, admin.getInt(1));
+			statement.executeUpdate();
+		}
+		PreparedStatement statement;
+		statement = connection.prepareStatement("update employe set EstAdmin = 1 where NumE = ? ", Statement.RETURN_GENERATED_KEYS);
+		statement.setInt(1, employe.getId());
+		statement.executeUpdate();
+		return 0;
+	
+}
+	
 }

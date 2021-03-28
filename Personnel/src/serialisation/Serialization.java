@@ -75,4 +75,10 @@ public class Serialization implements personnel.Passerelle
 
 		return -1;
 	}
+	
+	@Override
+	public int newAdmin(Employe employe) throws SauvegardeImpossible {
+
+		return -1;
+	}
 }

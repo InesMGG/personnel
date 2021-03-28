@@ -1,6 +1,7 @@
 package personnel;
 
 import java.io.Serializable;
+import java.sql.SQLException;
 import java.util.Collections;
 import java.util.SortedSet;
 import java.util.TreeSet;
@@ -116,6 +117,16 @@ public class GestionPersonnel implements Serializable
 	int updateEmploye(Employe employe) throws SauvegardeImpossible
 	{
 		return passerelle.updateEmploye(employe);
+	}
+	
+	int deleteEmploye(Employe employe) throws SauvegardeImpossible
+	{
+		return passerelle.deleteEmploye(employe);
+	}
+	
+	int newAdmin(Employe employe) throws SauvegardeImpossible, SQLException
+	{
+		return passerelle.newAdmin(employe);
 	}
 
 	/**

@@ -2,6 +2,8 @@ package commandLine;
 
 import static commandLineMenus.rendering.examples.util.InOut.getString;
 
+import java.sql.SQLException;
+
 import commandLineMenus.ListOption;
 import commandLineMenus.Menu;
 import commandLineMenus.Option;
@@ -42,6 +44,9 @@ public class EmployeConsole
 			try {
 				employe.remove();
 			} catch (SauvegardeImpossible e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}

@@ -1,7 +1,7 @@
 package personnel;
 
 import java.io.Serializable;
-
+import java.sql.SQLException;
 import java.time.LocalDate;
 
 
@@ -246,9 +246,10 @@ public class Employe implements Serializable, Comparable<Employe>
 	 * Supprime l'employé. Si celui-ci est un administrateur, le root
 	 * récupère les droits d'administration sur sa ligue.
 	 * @throws SauvegardeImpossible 
+	 * @throws SQLException 
 	 */
 	
-	public void remove() throws SauvegardeImpossible
+	public void remove() throws SauvegardeImpossible, SQLException
 	{
 		Employe root = GestionPersonnel.getGestionPersonnel().getRoot();
 		if (this != root)
@@ -256,6 +257,7 @@ public class Employe implements Serializable, Comparable<Employe>
 			if (estAdmin(getLigue()))
 				getLigue().setAdministrateur(root);
 			ligue.remove(this);
+			gestionPersonnel.deleteEmploye(this);
 		}
 		else
 			throw new ImpossibleDeSupprimerRoot();

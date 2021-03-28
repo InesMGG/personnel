@@ -2,6 +2,7 @@ package commandLine;
 
 import static commandLineMenus.rendering.examples.util.InOut.getString;
 
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -148,6 +149,9 @@ public class LigueConsole
 			try {
 				ligue.setAdministrateur(element);
 			} catch (SauvegardeImpossible e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}

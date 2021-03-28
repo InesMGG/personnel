@@ -1,6 +1,7 @@
 package personnel;
 
 import java.io.Serializable;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.Collections;
 import java.util.SortedSet;
@@ -85,14 +86,16 @@ public class Ligue implements Serializable, Comparable<Ligue>
 	 * administrateur.
 	 * @param administrateur le nouvel administrateur de la ligue.
 	 * @throws SauvegardeImpossible 
+	 * @throws SQLException 
 	 */
 	
-	public void setAdministrateur(Employe administrateur) throws SauvegardeImpossible
+	public void setAdministrateur(Employe administrateur) throws SauvegardeImpossible, SQLException
 	{
 		Employe root = GestionPersonnel.getGestionPersonnel().getRoot();
 		if (administrateur != root && administrateur.getLigue() != this)
 			throw new DroitsInsuffisants();
 		this.administrateur = administrateur;
+		gestionPersonnel.newAdmin(administrateur);
 	}
 
 	/**
