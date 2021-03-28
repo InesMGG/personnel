@@ -212,6 +212,10 @@ public class JDBC implements Passerelle
 	{
 		try
 		{
+			PreparedStatement instruction2;
+			instruction2 = connection.prepareStatement("delete from employe where NumLigue = ?", Statement.RETURN_GENERATED_KEYS);
+			instruction2.setInt(1, ligue.getId());
+			instruction2.executeUpdate();
 			PreparedStatement instruction;
 			instruction = connection.prepareStatement("delete from ligue where NumL = ?", Statement.RETURN_GENERATED_KEYS);
 			instruction.setInt(1, ligue.getId());
@@ -223,6 +227,7 @@ public class JDBC implements Passerelle
 			exception.printStackTrace();
 			throw new SauvegardeImpossible(exception);
 		}
+		
 	}
 	
 }
