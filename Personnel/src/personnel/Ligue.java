@@ -84,9 +84,10 @@ public class Ligue implements Serializable, Comparable<Ligue>
 	 * un employ√© de la ligue ou le root. R√©voque les droits de l'ancien 
 	 * administrateur.
 	 * @param administrateur le nouvel administrateur de la ligue.
+	 * @throws SauvegardeImpossible 
 	 */
 	
-	public void setAdministrateur(Employe administrateur)
+	public void setAdministrateur(Employe administrateur) throws SauvegardeImpossible
 	{
 		Employe root = GestionPersonnel.getGestionPersonnel().getRoot();
 		if (administrateur != root && administrateur.getLigue() != this)
@@ -114,9 +115,10 @@ public class Ligue implements Serializable, Comparable<Ligue>
 	 * @param dateDÈpart 
 	 * @param dateArrivÈe 
 	 * @return l'employ√© cr√©√©. 
+	 * @throws SauvegardeImpossible 
 	 */
 
-	public Employe addEmploye(String nom, String prenom, String mail, String password, LocalDate dateArrivÈe, LocalDate dateDÈpart)
+	public Employe addEmploye(String nom, String prenom, String mail, String password, LocalDate dateArrivÈe, LocalDate dateDÈpart) throws SauvegardeImpossible
 	{
 		Employe employe = new Employe(this.gestionPersonnel, this, nom, prenom, mail, password, dateArrivÈe, dateDÈpart);
 		employes.add(employe);
@@ -138,9 +140,10 @@ public class Ligue implements Serializable, Comparable<Ligue>
 	/**
 	 * Supprime la ligue, entra√Æne la suppression de tous les employ√©s
 	 * de la ligue.
+	 * @throws SauvegardeImpossible 
 	 */
 	
-	public void remove()
+	public void remove() throws SauvegardeImpossible
 	{
 		GestionPersonnel.getGestionPersonnel().remove(this);
 	}

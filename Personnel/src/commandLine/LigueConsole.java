@@ -98,9 +98,14 @@ public class LigueConsole
 		return new Option("ajouter un employé", "a",
 				() -> 
 				{
-					ligue.addEmploye(getString("nom : "), 
-						getString("prenom : "), getString("mail : "), 
-						getString("password : "), LocalDate.parse(getString("date d'arrivée : ")), LocalDate.parse(getString("date départ : ")));
+					try {
+						ligue.addEmploye(getString("nom : "), 
+							getString("prenom : "), getString("mail : "), 
+							getString("password : "), LocalDate.parse(getString("date d'arrivée : ")), LocalDate.parse(getString("date départ : ")));
+					} catch (SauvegardeImpossible e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				}
 		);
 	}
@@ -139,7 +144,14 @@ public class LigueConsole
 	{
 		return new List<Employe> ("Sélectionner un nouvel administrateur", "w",
 		()-> new ArrayList<>(ligue.getEmployes()),
-		(index, element)-> ligue.setAdministrateur(element)
+		(index, element)-> {
+			try {
+				ligue.setAdministrateur(element);
+			} catch (SauvegardeImpossible e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		);
 	}
 	
@@ -153,7 +165,12 @@ public class LigueConsole
 	
 	private Option supprimer(Ligue ligue)
 	{
-		return new Option("Supprimer", "d", () -> {ligue.remove();});
+		return new Option("Supprimer", "d", () -> {try {
+			ligue.remove();
+		} catch (SauvegardeImpossible e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}});
 	}
 	
 }

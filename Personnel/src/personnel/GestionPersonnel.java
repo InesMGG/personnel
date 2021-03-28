@@ -21,7 +21,7 @@ public class GestionPersonnel implements Serializable
 	private static GestionPersonnel gestionPersonnel = null;
 	private SortedSet<Ligue> ligues;
 
-	private Employe root = new Employe(this, null, "root", " ", " ", "toor", null, null);
+	private Employe root;
 
 	public final static int SERIALIZATION = 1, JDBC = 2, 
 			TYPE_PASSERELLE = JDBC;  
@@ -31,9 +31,10 @@ public class GestionPersonnel implements Serializable
 	 * Retourne l'unique instance de cette classe.
 	 * Crée cet objet s'il n'existe déjà.
 	 * @return l'unique objet de type {@link GestionPersonnel}.
+	 * @throws SauvegardeImpossible 
 	 */
 	
-	public static GestionPersonnel getGestionPersonnel()
+	public static GestionPersonnel getGestionPersonnel() throws SauvegardeImpossible
 	{
 		if (gestionPersonnel == null)
 		{
@@ -44,12 +45,13 @@ public class GestionPersonnel implements Serializable
 		return gestionPersonnel;
 	}
 
-	public GestionPersonnel()
+	public GestionPersonnel() throws SauvegardeImpossible
 	{
 		if (gestionPersonnel != null)
 			throw new RuntimeException("Vous ne pouvez cr�er qu'une seuls instance de cet objet.");
 		ligues = new TreeSet<>();
 		gestionPersonnel = this;
+		root = new Employe(this, null, "root", " ", " ", "toor", null, null);
 	}
 	
 	public void sauvegarder() throws SauvegardeImpossible
@@ -109,6 +111,11 @@ public class GestionPersonnel implements Serializable
 	int insertEmploye(Employe employe) throws SauvegardeImpossible
 	{
 		return passerelle.insertEmploye(employe);
+	}
+	
+	int updateEmploye(Employe employe) throws SauvegardeImpossible
+	{
+		return passerelle.updateEmploye(employe);
 	}
 
 	/**

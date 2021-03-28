@@ -12,6 +12,7 @@ import personnel.Employe;
 import personnel.GestionPersonnel;
 import personnel.ImpossibleDeSupprimerRoot;
 import personnel.Ligue;
+import personnel.SauvegardeImpossible;
 
 public class testEmploye 
 {
@@ -27,7 +28,7 @@ public class testEmploye
 	}
 	
 	@Test
-	void testRemoveEmploye() 
+	void testRemoveEmploye() throws SauvegardeImpossible 
 	{
 		Ligue ligue = this.gestionPersonnel.addLigue(1, "Flechete");
 		Employe employe = ligue.addEmploye("Neymar", "Jean", "adresse@mail.fr", PASSWORD, null, null);
@@ -39,7 +40,7 @@ public class testEmploye
 	}
 	
 	@Test
-	void testRemoveEmploye1()
+	void testRemoveEmploye1() throws SauvegardeImpossible
 	{
 		Ligue ligue = this.gestionPersonnel.addLigue(1, "Flechete");
 		Employe employe1 = ligue.addEmploye("Neymar", "Jean", "adresse@mail.fr", PASSWORD, null, null);
@@ -54,7 +55,7 @@ public class testEmploye
 	}
 	
 	@Test
-	void testCheckPassword()
+	void testCheckPassword() throws SauvegardeImpossible
 	{
 		Ligue ligue =this.gestionPersonnel.addLigue(1, "Flechete");
 		Employe employe = ligue.addEmploye("Neymar", "Jean", "adresse@mail.fr", PASSWORD, null, null);
@@ -63,7 +64,7 @@ public class testEmploye
 	}
 	
 	@Test
-	void testEstAdmin()
+	void testEstAdmin() throws SauvegardeImpossible
 	{
 		Ligue ligue1 = this.gestionPersonnel.addLigue(1, "Flechete");
 		Employe employe = ligue1.addEmploye("Neymar", "Jean", "adresse@mail.fr", PASSWORD, null, null);
