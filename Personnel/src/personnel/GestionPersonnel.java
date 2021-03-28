@@ -128,6 +128,11 @@ public class GestionPersonnel implements Serializable
 	{
 		return passerelle.newAdmin(employe);
 	}
+	
+	int deleteLigue(Ligue ligue) throws SauvegardeImpossible
+	{
+		return passerelle.deleteLigue(ligue);
+	}
 
 	/**
 	 * Retourne le root (super-utilisateur).
