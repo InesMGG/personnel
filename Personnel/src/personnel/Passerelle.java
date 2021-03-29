@@ -9,7 +9,7 @@ public interface Passerelle
 	public int insertLigue(Ligue ligue) throws SauvegardeImpossible;
 	public int updateLigue(Ligue ligue) throws SauvegardeImpossible;
 	public int insertEmploye(Employe employe) throws SauvegardeImpossible;
-	public int updateEmploye(Employe employe) throws SauvegardeImpossible;
+	public void updateEmploye(Employe employe) throws SauvegardeImpossible;
 	public int deleteEmploye(Employe employe) throws SauvegardeImpossible;
 	public int newAdmin(Employe employe) throws SauvegardeImpossible, SQLException;
 	public int deleteLigue(Ligue ligue) throws SauvegardeImpossible;

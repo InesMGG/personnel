@@ -145,7 +145,7 @@ public class JDBC implements Passerelle
 	}
 	
 	@Override
-	public int updateEmploye(Employe employe) throws SauvegardeImpossible 
+	public void updateEmploye(Employe employe) throws SauvegardeImpossible 
 	{
 		try 
 		{
@@ -159,7 +159,6 @@ public class JDBC implements Passerelle
 			instruction.setString(6, employe.getDateDépart().toString());
 			instruction.setInt(7, employe.getId());		
 			instruction.executeUpdate();
-			return 0;
 		} 
 		catch (SQLException exception) 
 		{
