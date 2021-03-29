@@ -150,14 +150,14 @@ public class JDBC implements Passerelle
 		try 
 		{
 			PreparedStatement instruction;
-			instruction = connection.prepareStatement("update employe set NomE = ?, PrenomE = ?, CourrielE = ?, PasswordE = ?, DAE = ?, DDE = ? where NumE = ?  ", Statement.RETURN_GENERATED_KEYS);
+			instruction = connection.prepareStatement("update employe set NomE = ?, PrenomE = ?, CourrielE = ?, PasswordE = ?, DAE = ?, DDE = ? where NumLigue = ?  ", Statement.RETURN_GENERATED_KEYS);
 			instruction.setString(1, employe.getNom());
 			instruction.setString(2, employe.getPrenom());
 			instruction.setString(3, employe.getMail());
 			instruction.setString(4, employe.getPassword());
 			instruction.setString(5, employe.getDateArrivée().toString());
 			instruction.setString(6, employe.getDateDépart().toString());
-			instruction.setInt(7, employe.getId());		
+			instruction.setInt(7, employe.getLigue().getId());		
 			instruction.executeUpdate();
 		} 
 		catch (SQLException exception) 
@@ -173,7 +173,7 @@ public class JDBC implements Passerelle
 		try
 		{
 			PreparedStatement instruction;
-			instruction = connection.prepareStatement("delete from employe where NumE = ?");
+			instruction = connection.prepareStatement("delete from employe where NumE = ?", Statement.RETURN_GENERATED_KEYS);
 			instruction.setInt(1, employe.getId());
 			instruction.executeUpdate();
 			return 0;

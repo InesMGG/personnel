@@ -119,9 +119,9 @@ public class GestionPersonnel implements Serializable
 		return passerelle.insertEmploye(employe);
 	}
 	
-	int updateEmploye(Employe employe) throws SauvegardeImpossible
+	void updateEmploye(Employe employe) throws SauvegardeImpossible
 	{
-		return passerelle.updateEmploye(employe);
+		passerelle.updateEmploye(employe);
 	}
 	
 	int deleteEmploye(Employe employe) throws SauvegardeImpossible

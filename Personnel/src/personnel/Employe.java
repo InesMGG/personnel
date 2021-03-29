@@ -103,7 +103,7 @@ public class Employe implements Serializable, Comparable<Employe>
 	public void setNom(String nom) throws SauvegardeImpossible
 	{
 		this.nom = nom;
-		this.id = gestionPersonnel.updateEmploye(this);
+		gestionPersonnel.updateEmploye(this);
 	}
 
 	/**
@@ -125,7 +125,7 @@ public class Employe implements Serializable, Comparable<Employe>
 	public void setPrenom(String prenom) throws SauvegardeImpossible
 	{
 		this.prenom = prenom;
-		this.id = gestionPersonnel.updateEmploye(this);
+		gestionPersonnel.updateEmploye(this);
 	}
 
 	/**
@@ -147,7 +147,7 @@ public class Employe implements Serializable, Comparable<Employe>
 	public void setMail(String mail) throws SauvegardeImpossible
 	{
 		this.mail = mail;
-		this.id = gestionPersonnel.updateEmploye(this);
+		gestionPersonnel.updateEmploye(this);
 	}
 
 	/**
@@ -172,7 +172,7 @@ public class Employe implements Serializable, Comparable<Employe>
 	public void setPassword(String password) throws SauvegardeImpossible
 	{
 		this.password= password;
-		this.id = gestionPersonnel.updateEmploye(this);
+		gestionPersonnel.updateEmploye(this);
 	}
 
 	public String getPassword()
@@ -205,7 +205,7 @@ public class Employe implements Serializable, Comparable<Employe>
 			else
 			{
 				this.dateDépart = dateDepart;
-				this.id = gestionPersonnel.updateEmploye(this);
+				gestionPersonnel.updateEmploye(this);
 			}
 		}
 	}
@@ -226,7 +226,7 @@ public class Employe implements Serializable, Comparable<Employe>
 			if (isBefore)
 			{
 				this.dateArrivée = dateArrivee;
-				this.id = gestionPersonnel.updateEmploye(this);
+				gestionPersonnel.updateEmploye(this);
 			}
 			else
 				
