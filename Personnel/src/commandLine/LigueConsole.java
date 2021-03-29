@@ -83,7 +83,11 @@ public class LigueConsole
 	private Option changerNom(final Ligue ligue)
 	{
 		return new Option("Renommer", "r", 
-				() -> {ligue.setNom(getString("Nouveau nom : "));});
+				() -> {try {
+					ligue.setNom(getString("Nouveau nom : "));
+				} catch (SauvegardeImpossible e) {
+					System.out.println("La base de données n'est pas accessible");
+				}});
 	}
 
 	private List<Ligue> selectionnerLigue()
