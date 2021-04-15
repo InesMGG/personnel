@@ -145,7 +145,7 @@ public class JDBC implements Passerelle
 	}
 	
 	@Override
-	public void updateEmploye(Employe employe) throws SauvegardeImpossible 
+	public int updateEmploye(Employe employe) throws SauvegardeImpossible 
 	{
 		try 
 		{
@@ -164,7 +164,8 @@ public class JDBC implements Passerelle
 		{
 			exception.printStackTrace();
 			throw new SauvegardeImpossible(exception);
-		}		
+		}
+		return 0;		
 	}
 	
 	@Override

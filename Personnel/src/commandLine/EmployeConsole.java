@@ -11,6 +11,7 @@ import personnel.Employe;
 import personnel.ImpossibleChangerDate;
 import personnel.SauvegardeImpossible;
 
+
 public class EmployeConsole 
 {
 	private Option afficher(final Employe employe)

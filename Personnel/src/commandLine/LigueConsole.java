@@ -12,6 +12,7 @@ import commandLineMenus.Option;
 
 import personnel.*;
 
+
 public class LigueConsole 
 {
 	private GestionPersonnel gestionPersonnel;
