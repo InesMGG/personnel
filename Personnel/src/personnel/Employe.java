@@ -282,8 +282,7 @@ public class Employe implements Serializable, Comparable<Employe>
 			else
 				res += ligue.toString();
 		} catch (SauvegardeImpossible e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("Accès à la base de données impossible");
 		}
 		return res ;
 	}

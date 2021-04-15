@@ -45,11 +45,9 @@ public class EmployeConsole
 			try {
 				employe.remove();
 			} catch (SauvegardeImpossible e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				System.out.println("Impossible de supprimer cette employé");
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				System.out.println("Impossible de supprimer cette employé");
 			}
 		
 		}
@@ -58,27 +56,23 @@ public class EmployeConsole
 	
 	private Option changerDateArrivée(final Employe employe) 
 	{
-		return new Option("Changer la date d'arrivée", "a", () -> {try {
+		return new Option("Changer la date d'arrivée YYYY-MM-DD", "a", () -> {try {
 			employe.setDateArrivée(getString("Nouvelle date d'arrivée : "));
 		} catch (ImpossibleChangerDate e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("Impossible de changer la date d'arrivée de cette employé");
 		} catch (SauvegardeImpossible e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("Impossible de changer la date d'arrivée de cette employé");
 		}});
 	}
 
 	private Option changerDateDépart(final Employe employe) 
 	{
-		return new Option("Changer la date de départ", "d", () -> {try {
+		return new Option("Changer la date de départ YYYY-MM-DD", "d", () -> {try {
 			employe.setDateDépart(getString("Nouvelle date de départ : "));
 		} catch (ImpossibleChangerDate e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("Impossible de changer la date de départ de cette employé");
 		} catch (SauvegardeImpossible e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("Impossible de changer la date de départ de cette employé");
 		}});
 	}
 
@@ -87,8 +81,7 @@ public class EmployeConsole
 		return new Option("Changer le nom", "n", () -> {try {
 			employe.setNom(getString("Nouveau nom : "));
 		} catch (SauvegardeImpossible e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("Impossible de changer le nom de cette employé");
 		}});
 	}
 	
@@ -97,8 +90,7 @@ public class EmployeConsole
 		return new Option("Changer le prénom", "p", () -> {try {
 			employe.setPrenom(getString("Nouveau prénom : "));
 		} catch (SauvegardeImpossible e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("Impossible de changer le prénom de cette employé");
 		}});
 	}
 	
@@ -107,8 +99,7 @@ public class EmployeConsole
 		return new Option("Changer le mail", "e", () -> {try {
 			employe.setMail(getString("Nouveau mail : "));
 		} catch (SauvegardeImpossible e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("Impossible de changer le courriel de cette employé");
 		}});
 	}
 	
@@ -117,8 +108,7 @@ public class EmployeConsole
 		return new Option("Changer le password", "x", () -> {try {
 			employe.setPassword(getString("Nouveau password : "));
 		} catch (SauvegardeImpossible e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("Impossible de changer le mot de passe de cette employé");
 		}});
 	}
 	

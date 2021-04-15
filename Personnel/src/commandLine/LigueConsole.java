@@ -87,7 +87,7 @@ public class LigueConsole
 				() -> {try {
 					ligue.setNom(getString("Nouveau nom : "));
 				} catch (SauvegardeImpossible e) {
-					System.out.println("La base de données n'est pas accessible");
+					System.out.println("Impossible de changer le nom de la ligue");
 				}});
 	}
 
@@ -109,8 +109,7 @@ public class LigueConsole
 							getString("prenom : "), getString("mail : "), 
 							getString("password : "), LocalDate.parse(getString("date d'arrivée : ")), LocalDate.parse(getString("date départ : ")));
 					} catch (SauvegardeImpossible e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
+						System.out.println("Impossible de sauvegarder cette employé");
 					}
 				}
 		);
@@ -154,11 +153,9 @@ public class LigueConsole
 			try {
 				ligue.setAdministrateur(element);
 			} catch (SauvegardeImpossible e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				System.out.println("Impossible de changer l'administrateur de cette ligue");
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				System.out.println("Impossible de changer l'administrateur de cette ligue");
 			}
 		}
 		);
@@ -177,8 +174,7 @@ public class LigueConsole
 		return new Option("Supprimer", "d", () -> {try {
 			ligue.remove();
 		} catch (SauvegardeImpossible e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("Impossible de supprimer cette ligue");
 		}});
 	}
 	
