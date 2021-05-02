@@ -58,6 +58,7 @@ public class PersonnelConsole extends JFrame
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setBackground(Color.WHITE);
 		this.setLocationRelativeTo(null);
+		this.setSize(700,400);
 		setLookComponent(confirmer);
 		setLookComponent(username);
 		setLookComponent(motDePasse);
@@ -153,7 +154,6 @@ public class PersonnelConsole extends JFrame
 		colonne.add(MotDePasse);
 		colonne.add(Confirmer);
 		this.getContentPane().add(colonne);
-		this.pack();
 		this.setVisible(true);
 	}
 	

@@ -47,8 +47,6 @@ public class LigueConsole extends JFrame
 	private JTextField nomLigue = new JTextField();
 	private JButton modifierNomLigue = new JButton("Modifier le nom de la ligue");
 	private JButton modifierEmploye = new JButton("Modifier l'employe");
-	private JButton supprimerLigue = new JButton("Supprimer ");
-
 	public LigueConsole(GestionPersonnel gestionPersonnel, EmployeConsole employeConsole, Employe admin) throws SauvegardeImpossible, SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException
 	{
 		this.gestionPersonnel = gestionPersonnel;
@@ -74,8 +72,7 @@ public class LigueConsole extends JFrame
 				DefaultTableModel ligneTable = new DefaultTableModel(donnees, colonnes);
 				for(Ligue ligues : gestionPersonnel.getLigues())
 				{
-					supprimerLigue.setText(supprimerLigue.getText() +ligues.getNom());
-					ligneTable.addRow(new Object[] {ligues.getNom(), new JButton("Voir "+ ligues.getNom()) ,supprimerLigue });
+					ligneTable.addRow(new Object[] {ligues.getNom(), new JButton("Voir "+ ligues.getNom()) ,new JButton("supprimer " + ligues.getNom()) });
 				}
 				tableau= new JTable(ligneTable);
 				tableau.getColumn("Voir ligue").setCellRenderer(new TableComponent());
@@ -314,17 +311,22 @@ public class LigueConsole extends JFrame
 			public void setTable(JTable table) {this.table = table;}
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				for(Ligue ligue : gestionPersonnel.getLigues())
-				{
-					if(table.getValueAt(this.row, (this.column - 2)).equals(ligue.getNom()) && ligue != null ) {
-						try {
-							ligue.remove();
-							DefaultTableModel ligneARetirer = (DefaultTableModel) table.getModel();
-							ligneARetirer.removeRow(this.row);
-						} catch (SauvegardeImpossible e) {
-							e.printStackTrace();
+				try {
+					for(Ligue ligue : gestionPersonnel.getGestionPersonnel().getLigues())
+					{
+						if(table.getValueAt(this.row, (this.column - 2)).equals(ligue.getNom()) && ligue != null ) {
+							try {
+								ligue.remove();
+								DefaultTableModel ligneARetirer = (DefaultTableModel) table.getModel();
+								ligneARetirer.removeRow(this.row);
+							} catch (SauvegardeImpossible e) {
+								e.printStackTrace();
+							}
 						}
 					}
+				} catch (SauvegardeImpossible e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
 			}
 		}
