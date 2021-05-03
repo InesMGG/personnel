@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<jardesc>
+    <jar path="CommandLine/jar/commandLineMenus.jar"/>
+    <options buildIfNeeded="true" compress="true" descriptionLocation="/CommandLine/jar/jar.jardesc" exportErrors="true" exportWarnings="true" includeDirectoryEntries="false" overwrite="false" saveDescription="true" storeRefactorings="false" useSourceFolders="false"/>
+    <storedRefactorings deprecationInfo="true" structuralOnly="false"/>
+    <selectedProjects/>
+    <selectedElements exportClassFiles="false" exportJavaFiles="true" exportOutputFolder="false">
+        <javaElement handleIdentifier="=CommandLine/src"/>
+        <file path="/CommandLine/.project"/>
+        <file path="/CommandLine/javadoc.xml"/>
+        <folder path="/CommandLine/jar"/>
+    </selectedElements>
+</jardesc>
