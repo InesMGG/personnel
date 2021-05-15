@@ -62,7 +62,7 @@ public class PersonnelConsole extends JFrame
 		setLookComponent(motDePasse);
 		setLookComponent(erreurConnexion);
 		ligneTitre.add(new JLabel("Bienvenue sur personnel "));
-		ligneUsername.add(new JLabel("Adresse mail :"));
+		ligneUsername.add(new JLabel("Identifiant :"));
 		username.setMinimumSize(new Dimension(150,25));
 		username.setMaximumSize(new Dimension(150,25));
 		ligneUsername.add(username);
