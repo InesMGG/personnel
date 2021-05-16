@@ -1,7 +1,7 @@
 package personnel;
 
 /**
- * Exception levÃ©e lorsqu'il est impossible de sauvegarder le gestionnaire.
+ * Exception levée lorsqu'il est impossible de sauvegarder le gestionnaire.
  */
 
 public class SauvegardeImpossible extends Exception
@@ -18,7 +18,7 @@ public class SauvegardeImpossible extends Exception
 	public void printStackTrace() 
 	{
 			super.printStackTrace();
-			System.err.println("CausÃ© par : ");
+			System.err.println("Causé par : ");
 			exception.printStackTrace();			
 	}
 }

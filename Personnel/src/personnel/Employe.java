@@ -4,56 +4,60 @@ import java.io.Serializable;
 import java.sql.SQLException;
 import java.time.LocalDate;
 
+
+
 /**
- * Employé d'une ligue hébergée par la M2L. Certains peuvent 
- * être administrateurs des employés de leur ligue.
- * Un seul employé, rattaché à aucune ligue, est le root.
- * Il est impossible d'instancier directement un employé, 
- * il faut passer la méthode 
+ * EmployÃ© d'une ligue hÃ©bergÃ©e par la M2L. Certains peuvent 
+ * Ãªtre administrateurs des employÃ©s de leur ligue.
+ * Un seul employÃ©, rattachÃ© Ã  aucune ligue, est le root.
+ * Il est impossible d'instancier directement un employÃ©, 
+ * il faut passer la mÃ©thode {@link Ligue#addEmploye addEmploye}.
  */
 
 public class Employe implements Serializable, Comparable<Employe>
 {
 	private static final long serialVersionUID = 4795721718037994734L;
-	private int id;
 	private String nom, prenom, password, mail;
-	private LocalDate dateDebut, dateFin;
+	private LocalDate dateArrivée, dateDépart;
 	private Ligue ligue;
 	private GestionPersonnel gestionPersonnel;
+	private int id;
 	
-	public Employe(GestionPersonnel gestionPersonnel, Ligue ligue, String nom, String prenom, String mail, String password , LocalDate dateDebut, LocalDate dateFin ) throws SauvegardeImpossible, SQLException
+	Employe(GestionPersonnel gestionPersonnel, Ligue ligue, String nom, String prenom, String mail, String password, LocalDate dateArrivée, LocalDate dateDépart, int id)
 	{
 		this.gestionPersonnel = gestionPersonnel;
 		this.nom = nom;
 		this.prenom = prenom;
 		this.password = password;
 		this.mail = mail;
-		this.dateDebut = dateDebut;
-		this.dateFin = dateFin;
+		this.dateArrivée = dateArrivée;
+		this.dateDépart = dateDépart;
 		this.ligue = ligue;
-		if(dateDebut != null && dateFin !=null && dateDebut.isBefore(dateFin))
-			this.id = gestionPersonnel.insertEmploye(this);//gestion erreur date
+		this.id = id;
 	}
 	
-	Employe(GestionPersonnel gestionPersonnel, Ligue ligue,int id, String nom, String prenom, String mail, String password, LocalDate dateDebut, LocalDate dateFin)
+	Employe(GestionPersonnel gestionPersonnel, Ligue ligue, String nom, String prenom, String mail, String password, LocalDate dateArrivée, LocalDate dateDépart) throws SauvegardeImpossible, SQLException
 	{
 		this.gestionPersonnel = gestionPersonnel;
-		this.id = id;
 		this.nom = nom;
 		this.prenom = prenom;
 		this.password = password;
 		this.mail = mail;
+		this.dateArrivée = dateArrivée;
+		this.dateDépart = dateDépart;
 		this.ligue = ligue;
-		this.dateDebut = dateDebut;
-		this.dateFin = dateFin;
+		if (dateArrivée != null && dateDépart!= null)
+		{
+			this.id = gestionPersonnel.insertEmploye(this);	
+		}	
 	}
 	
 	/**
-	 * Retourne vrai ssi l'employé est administrateur de la ligue 
-	 * passée en paramètre.
-	 * @return vrai ssi l'employé est administrateur de la ligue 
-	 * passée en paramètre.
-	 * @param ligue la ligue pour laquelle on souhaite vérifier si this 
+	 * Retourne vrai ssi l'employÃ© est administrateur de la ligue 
+	 * passÃ©e en paramÃ¨tre.
+	 * @return vrai ssi l'employÃ© est administrateur de la ligue 
+	 * passÃ©e en paramÃ¨tre.
+	 * @param ligue la ligue pour laquelle on souhaite vÃ©rifier si this 
 	 * est l'admininstrateur.
 	 */
 	
@@ -63,8 +67,8 @@ public class Employe implements Serializable, Comparable<Employe>
 	}
 	
 	/**
-	 * Retourne vrai ssi l'employé est le root.
-	 * @return vrai ssi l'employé est le root.
+	 * Retourne vrai ssi l'employÃ© est le root.
+	 * @return vrai ssi l'employÃ© est le root.
 	 * @throws SauvegardeImpossible 
 	 * @throws SQLException 
 	 */
@@ -75,9 +79,16 @@ public class Employe implements Serializable, Comparable<Employe>
 	}
 	
 	/**
-	 * Retourne le nom de l'employé.
-	 * @return le nom de l'employé. 
+	 * Retourne le nom de l'employÃ©.
+	 * @return le nom de l'employÃ©. 
 	 */
+	
+	public int getId()
+	{
+		return id;
+	}
+	
+	
 	
 	public String getNom()
 	{
@@ -85,7 +96,7 @@ public class Employe implements Serializable, Comparable<Employe>
 	}
 
 	/**
-	 * Change le nom de l'employé.
+	 * Change le nom de l'employÃ©.
 	 * @param nom le nouveau nom.
 	 * @throws SauvegardeImpossible 
 	 * @throws SQLException 
@@ -98,19 +109,18 @@ public class Employe implements Serializable, Comparable<Employe>
 	}
 
 	/**
-	 * Retourne le prénom de l'employé.
-	 * @return le prénom de l'employé.
+	 * Retourne le prÃ©nom de l'employÃ©.
+	 * @return le prÃ©nom de l'employÃ©.
 	 */
 	
 	public String getPrenom()
 	{
 		return prenom;
-
 	}
 	
 	/**
-	 * Change le prénom de l'employé.
-	 * @param prenom le nouveau prénom de l'employé. 
+	 * Change le prÃ©nom de l'employÃ©.
+	 * @param prenom le nouveau prÃ©nom de l'employÃ©. 
 	 * @throws SauvegardeImpossible 
 	 * @throws SQLException 
 	 */
@@ -122,8 +132,8 @@ public class Employe implements Serializable, Comparable<Employe>
 	}
 
 	/**
-	 * Retourne le mail de l'employé.
-	 * @return le mail de l'employé.
+	 * Retourne le mail de l'employÃ©.
+	 * @return le mail de l'employÃ©.
 	 */
 	
 	public String getMail()
@@ -132,8 +142,8 @@ public class Employe implements Serializable, Comparable<Employe>
 	}
 	
 	/**
-	 * Change le mail de l'employé.
-	 * @param mail le nouveau mail de l'employé.
+	 * Change le mail de l'employÃ©.
+	 * @param mail le nouveau mail de l'employÃ©.
 	 * @throws SauvegardeImpossible 
 	 * @throws SQLException 
 	 */
@@ -143,58 +153,23 @@ public class Employe implements Serializable, Comparable<Employe>
 		this.mail = mail;
 		gestionPersonnel.updateEmploye(this);
 	}
-	
-	public String getPassword() {
-		return password;
-	}
 
 	/**
-	 * Retourne vrai ssi le password passé en paramètre est bien celui
-	 * de l'employé.
-	 * @return vrai ssi le password passé en paramètre est bien celui
-	 * de l'employé.
-	 * @param password le password auquel comparer celui de l'employé.
+	 * Retourne vrai ssi le password passÃ© en paramÃ¨tre est bien celui
+	 * de l'employÃ©.
+	 * @return vrai ssi le password passÃ© en paramÃ¨tre est bien celui
+	 * de l'employÃ©.
+	 * @param password le password auquel comparer celui de l'employÃ©.
 	 */
-	
-	public LocalDate getDateDebut() {
-		return dateDebut;
-	}
-
-	public void setDateDebut(LocalDate datedebut) throws ErreurDateDepart, SauvegardeImpossible, SQLException {
-		if(dateFin == null)
-			this.dateDebut = datedebut;
-		else if(datedebut.isAfter(dateFin))
-			throw new ErreurDateDepart(datedebut, dateFin);
-		else {
-			this.dateDebut = datedebut;
-			gestionPersonnel.updateEmploye(this);
-		}
-			
-	}
-
-	public LocalDate getDateFin() {
-		return dateFin;
-	}
-
-	public void setDateFin(LocalDate datefin) throws ErreurDateFin, SauvegardeImpossible, SQLException {
-		if(dateDebut ==null )
-			this.dateFin = datefin;
-		else if(datefin.isBefore(dateDebut))
-			throw new ErreurDateFin(datefin, dateDebut);
-		else {
-			this.dateFin = datefin;
-			gestionPersonnel.updateEmploye(this);
-		}
-	}
 	
 	public boolean checkPassword(String password)
 	{
 		return this.password.equals(password);
 	}
-	
+
 	/**
-	 * Change le password de l'employé.
-	 * @param password le nouveau password de l'employé. 
+	 * Change le password de l'employÃ©.
+	 * @param password le nouveau password de l'employÃ©. 
 	 * @throws SauvegardeImpossible 
 	 * @throws SQLException 
 	 */
@@ -205,10 +180,67 @@ public class Employe implements Serializable, Comparable<Employe>
 		gestionPersonnel.updateEmploye(this);
 	}
 
+	public String getPassword()
+	{
+		return password;
+	}
 	/**
-	 * Retourne la ligue à laquelle l'employé est affecté.
-	 * @return la ligue à laquelle l'employé est affecté.
+	 * Retourne la ligue Ã  laquelle l'employÃ© est affectÃ©.
+	 * @return la ligue Ã  laquelle l'employÃ© est affectÃ©.
 	 */
+	
+	public LocalDate getDateDépart() {
+		return dateDépart;
+	}
+
+	public void setDateDépart(String dateDépart) throws ImpossibleChangerDate, SauvegardeImpossible, SQLException 
+	{
+		LocalDate dateDepart = LocalDate.parse(dateDépart);
+		if (dateArrivée == null)
+		{
+			this.dateDépart = dateDepart;
+		}
+		else
+		{
+			boolean isBefore = dateDepart.isBefore(dateArrivée);
+			if (isBefore)
+			{
+				throw new ImpossibleChangerDate();
+			}
+			else
+			{
+				this.dateDépart = dateDepart;
+				gestionPersonnel.updateEmploye(this);
+			}
+		}
+	}
+
+	public LocalDate getDateArrivée() {
+		return dateArrivée;
+	}
+
+	public void setDateArrivée(String dateArrivée) throws ImpossibleChangerDate, SauvegardeImpossible, SQLException {
+		LocalDate dateArrivee = LocalDate.parse(dateArrivée);
+		if(dateDépart == null)
+		{
+			this.dateArrivée = dateArrivee;
+		}
+		else
+		{
+			boolean isBefore = dateArrivee.isBefore(dateDépart);
+			if (isBefore)
+			{
+				this.dateArrivée = dateArrivee;
+				gestionPersonnel.updateEmploye(this);
+			}
+			else
+				
+			{
+				throw new ImpossibleChangerDate();
+			}
+		}
+		
+	}
 	
 	public Ligue getLigue()
 	{
@@ -216,8 +248,8 @@ public class Employe implements Serializable, Comparable<Employe>
 	}
 
 	/**
-	 * Supprime l'employé. Si celui-ci est un administrateur, le root
-	 * récupère les droits d'administration sur sa ligue.
+	 * Supprime l'employÃ©. Si celui-ci est un administrateur, le root
+	 * rÃ©cupÃ¨re les droits d'administration sur sa ligue.
 	 * @throws SauvegardeImpossible 
 	 * @throws SQLException 
 	 */
@@ -227,21 +259,13 @@ public class Employe implements Serializable, Comparable<Employe>
 		Employe root = GestionPersonnel.getGestionPersonnel().getRoot();
 		if (this != root)
 		{
-			gestionPersonnel.deleteEmploye(this);
 			if (estAdmin(getLigue()))
 				getLigue().setAdministrateur(root);
 			ligue.remove(this);
+			gestionPersonnel.deleteEmploye(this);
 		}
 		else
 			throw new ImpossibleDeSupprimerRoot();
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
 	}
 
 	@Override
@@ -256,10 +280,10 @@ public class Employe implements Serializable, Comparable<Employe>
 	@Override
 	public String toString()
 	{
-		String res = nom + " " + prenom + " " + mail + " " + dateDebut + " " + dateFin + " " + password + " (";
+		String res = nom +" " +prenom + " "+ mail+" " + dateArrivée+ " "+ dateDépart + " ";
 		try {
 			if (estRoot())
-				res += "super-utilisateur";
+				res += " (super-utilisateur)";
 			else
 				res += ligue.toString();
 		} catch (SauvegardeImpossible e) {
@@ -269,7 +293,7 @@ public class Employe implements Serializable, Comparable<Employe>
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return res + ")";
+		return res ;
 	}
-
+	
 }

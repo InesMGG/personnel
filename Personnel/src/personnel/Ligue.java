@@ -8,11 +8,11 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 
 /**
- * Représente une ligue. Chaque ligue est reliée à une liste
+ * Représente une ligue. Chaque ligue est reliée �  une liste
  * d'employés dont un administrateur. Comme il n'est pas possible
- * de créer un employé sans l'affecter à une ligue, le root est 
- * l'administrateur de la ligue jusqu'à ce qu'un administrateur 
- * lui ait été affecté avec la fonction 
+ * de créer un employé sans l'affecter �  une ligue, le root est 
+ * l'administrateur de la ligue jusqu'�  ce qu'un administrateur 
+ * lui ait été affecté avec la fonction {@link #setAdministrateur}.
  */
 
 public class Ligue implements Serializable, Comparable<Ligue>
@@ -27,13 +27,12 @@ public class Ligue implements Serializable, Comparable<Ligue>
 	/**
 	 * Crée une ligue.
 	 * @param nom le nom de la ligue.
-	 * @throws SQLException 
 	 */
 	
-	Ligue(GestionPersonnel gestionPersonnel, String nom) throws SauvegardeImpossible, SQLException
+	Ligue(GestionPersonnel gestionPersonnel, String nom) throws SauvegardeImpossible
 	{
 		this(gestionPersonnel, -1, nom);
-		this.id = gestionPersonnel.insert(this); 
+		this.id = gestionPersonnel.insertLigue(this); 
 	}
 
 	Ligue(GestionPersonnel gestionPersonnel, int id, String nom)
@@ -45,6 +44,11 @@ public class Ligue implements Serializable, Comparable<Ligue>
 		this.id = id;
 	}
 
+	public int getId()
+	{
+		return id;
+	}
+	
 	/**
 	 * Retourne le nom de la ligue.
 	 * @return le nom de la ligue.
@@ -58,10 +62,10 @@ public class Ligue implements Serializable, Comparable<Ligue>
 	/**
 	 * Change le nom.
 	 * @param nom le nouveau nom de la ligue.
-	 * @throws SQLException 
+	 * @throws SauvegardeImpossible 
 	 */
 
-	public void setNom(String nom) throws SauvegardeImpossible, SQLException
+	public void setNom(String nom) throws SauvegardeImpossible
 	{
 		this.nom = nom;
 		gestionPersonnel.updateLigue(this);
@@ -83,25 +87,19 @@ public class Ligue implements Serializable, Comparable<Ligue>
 	 * un employé de la ligue ou le root. Révoque les droits de l'ancien 
 	 * administrateur.
 	 * @param administrateur le nouvel administrateur de la ligue.
-	 * @throws SQLException 
 	 * @throws SauvegardeImpossible 
+	 * @throws SQLException 
 	 */
 	
 	public void setAdministrateur(Employe administrateur) throws SauvegardeImpossible, SQLException
 	{
 		Employe root = GestionPersonnel.getGestionPersonnel().getRoot();
-		gestionPersonnel.changerAdmin(administrateur);
 		if (administrateur != root && administrateur.getLigue() != this)
 			throw new DroitsInsuffisants();
 		this.administrateur = administrateur;
+		gestionPersonnel.newAdmin(administrateur);
 	}
 
-	public void setRoot(Employe administrateur) throws SauvegardeImpossible, SQLException
-	{
-		Employe root = GestionPersonnel.getGestionPersonnel().getRoot();
-		gestionPersonnel.updateEmploye(root);
-	}
-	
 	/**
 	 * Retourne les employés de la ligue.
 	 * @return les employés de la ligue dans l'ordre alphabétique.
@@ -119,20 +117,23 @@ public class Ligue implements Serializable, Comparable<Ligue>
 	 * @param prenom le prénom de l'employé.
 	 * @param mail l'adresse mail de l'employé.
 	 * @param password le password de l'employé.
-	 * @param dateFin 
-	 * @param dateDebut 
+	 * @param dateD�part 
+	 * @param dateArriv�e 
 	 * @return l'employé créé. 
-	 * @throws ErreurDateDepart 
-	 * @throws ErreurDateFin 
 	 * @throws SauvegardeImpossible 
 	 * @throws SQLException 
 	 */
 
-	public Employe addEmploye(String nom, String prenom, String mail, LocalDate dateDebut, LocalDate dateFin, String password) throws ErreurDateDepart, ErreurDateFin, SauvegardeImpossible, SQLException
+	public Employe addEmploye(String nom, String prenom, String mail, String password, LocalDate dateArriv�e, LocalDate dateD�part) throws SauvegardeImpossible, SQLException
 	{
-		Employe employe = new Employe(this.gestionPersonnel, this, nom, prenom, mail, password, dateDebut,dateFin);
-			employe.setDateDebut(dateDebut);
-			employe.setDateFin(dateFin);
+		Employe employe = new Employe(this.gestionPersonnel, this, nom, prenom, mail, password, dateArriv�e, dateD�part);
+		employes.add(employe);
+		return employe;
+	}
+	
+	public Employe addEmploye(int id, String nom, String prenom, String mail, String password, LocalDate dateArriv�e, LocalDate dateD�part)
+	{
+		Employe employe = new Employe(this.gestionPersonnel, this, nom, prenom, mail, password, dateArriv�e, dateD�part, id);
 		employes.add(employe);
 		return employe;
 	}
@@ -167,24 +168,4 @@ public class Ligue implements Serializable, Comparable<Ligue>
 	{
 		return nom;
 	}
-
-	public Employe addEmploye(int id, String nom, String prenom, String mail, LocalDate dateDebut, LocalDate dateFin,String password) throws ErreurDateDepart, ErreurDateFin, SauvegardeImpossible, SQLException
-	{
-		Employe employe = new Employe(this.gestionPersonnel, this, id, nom, prenom, mail,password, dateDebut,dateFin);
-		employe.setDateDebut(dateDebut);
-		employe.setDateFin(dateFin);
-		employe.setId(id);
-		employes.add(employe);
-		return employe;
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-	
-	
 }

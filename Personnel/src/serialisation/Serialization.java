@@ -30,7 +30,7 @@ public class Serialization implements personnel.Passerelle
 	
 	/**
 	 * Sauvegarde le gestionnaire pour qu'il soit ouvert automatiquement 
-	 * lors d'une exÃ©cution ultÃ©rieure du programme.
+	 * lors d'une exécution ultérieure du programme.
 	 * @throws SauvegardeImpossible Si le support de sauvegarde est inaccessible.
 	 */
 	@Override
@@ -47,35 +47,44 @@ public class Serialization implements personnel.Passerelle
 	}
 	
 	@Override
-	public int insert(Ligue ligue) throws SauvegardeImpossible
+	public int insertLigue(Ligue ligue) throws SauvegardeImpossible
 	{
 		return -1;
 	}
-	
+
 	@Override
-	public void updateLigue(Ligue ligue) throws SauvegardeImpossible
-	{
+	public int updateLigue(Ligue ligue) throws SauvegardeImpossible {
+		
+		return -1;
 	}
 
 	@Override
 	public int insertEmploye(Employe employe) throws SauvegardeImpossible {
+		
+		return -1;
+	}
+
+	@Override
+	public int updateEmploye(Employe employe) throws SauvegardeImpossible {
+		return -1;
+
+	}
+	
+	@Override
+	public int deleteEmploye(Employe employe) throws SauvegardeImpossible {
+
 		return -1;
 	}
 	
 	@Override
-	public void updateEmploye(Employe employe) throws SauvegardeImpossible {
+	public int newAdmin(Employe employe) throws SauvegardeImpossible {
+
+		return -1;
 	}
 	
 	@Override
-	public void changerAdmin(Employe employe) throws SauvegardeImpossible{
+	public int deleteLigue(Ligue ligue) throws SauvegardeImpossible {
+
+		return -1;
 	}
-	
-	@Override
-	public void deleteEmploye(Employe employe) throws SauvegardeImpossible{
-	}
-	
-	@Override
-	public void deleteLigue(Ligue ligue) throws SauvegardeImpossible{
-	}
-		
 }
